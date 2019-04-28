@@ -83,8 +83,11 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 <body>
                     <h1>KARYOTYPE</h1>
                     <p>WELCOME TO THE KARYOTYPE PAGE</p>
-                    <form action="myserver" method="get">
+                    <form action="karyotype" method="get">
                         Species  <input type="text" name="species">
+                        <br>
+                        <input type="submit" value="SEND">
+                        <br><br>
                         <br><br>
                     </form>
                     <p></p>
@@ -110,7 +113,9 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         <body>
                             <h1>KARYOTYPE</h1>
                             <p> """
-                contents += 'The karyotype of ' + msg_split[1] + 'is: ' + karyotype + '<p>' + '\n' + '<p>'
+                contents += 'The karyotype of ' + msg_split[1] + ' is: '
+                for i in karyotype:
+                    contents += i + ' '
 
                 contents += """</p>
                                 <a href="main_page">MAIN page</a>
@@ -119,20 +124,62 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                             </html>
                             """
         elif self.path.startswith('/chromosomeLength'):
-            msg_split = self.path.split('=')
-            msg_split2 = []
-            for i in msg_split:
-                msg_split2 += i.split('&')
-            server = "http://rest.ensembl.org"
-            ext = "/info/assembly/bos_taurus?"
+            contents = """<!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <title>Chromosome length page</title>
+                </head>
+                <body>
+                    <h1>CHROMOSOME LENGTH</h1>
+                    <p>WELCOME TO THE CHROMOSOME LENGTH PAGE</p>
+                    <form action="chromosomeLength" method="get">
+                        Species  <input type="text" name="species">
+                        <br>
+                        <input type="submit" value="SEND">
+                        <br><br>
+                        Chromosome  <input type="text" name="chromo">
+                        <br>
+                        <input type="submit" value="SEND">
+                        <br><br>
+                        <br><br>
+                    </form>
+                    <p></p>
+                    <a href="main_page">MAIN page</a>
+                </body>
+                </html>"""
+            if self.path.startswith('/chromosomeLength?species='):
+                msg_split = self.path.split('=')
+                msg_split2 = []
+                for i in msg_split:
+                    msg_split2 += i.split('&')
+                server = "http://rest.ensembl.org"
+                ext = "/info/assembly/{}?".format(msg_split2[1])
+                r = requests.get(server + ext, headers={"Content-Type": "application/json"})
+                information = r.json()
+                chromo = msg_split2[3]
+                for i in information['top_level_region']:
+                    if chromo == i['name']:
+                        length = i['length']
+                contents = """
+                                        <!DOCTYPE html>
+                                        <html lang="en">
+                                        <head>
+                                            <meta charset="UTF-8">
+                                            <title>Chromosome length page</title>
+                                        </head>
+                                        <body>
+                                            <h1>CHROMOSOME LENGTH PAGE</h1>
+                                            <p> """
+                contents += 'The length of the chromosome ' + chromo
+                contents += ' from the species ' + msg_split2[1] + ' is ' + str(length)
 
-            r = requests.get(server + ext, headers={"Content-Type": "application/json"})
+                contents += """</p>
+                                                <a href="main_page">MAIN page</a>
 
-            information = r.json()
-            chromo = str(input('chromo'))
-            for i in information['top_level_region']:
-                if chromo == i['name']:
-                    print(i['length'])
+                                            </body>
+                                            </html>
+                                            """
 
         else:
             filename = open('error.html', 'r')
