@@ -14,7 +14,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         # Print the request line
         termcolor.cprint(self.requestline, 'green')
 
-        if self.path.startswith('/main') or self.path == '/':
+        if self.path == '/main_page' or self.path == '/':
             filename = open('main_page.html', 'r')
             contents = filename.read()
         elif self.path.startswith('/listSpecies'):
@@ -134,7 +134,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     <h1>CHROMOSOME LENGTH</h1>
                     <p>WELCOME TO THE CHROMOSOME LENGTH PAGE</p>
                     <form action="chromosomeLength" method="get">
-                        Species  <input type="text" name="species">
+                        Species  <input type="text" name="specie">
                         <br>
                         Chromosome  <input type="text" name="chromo">
                         <br>
