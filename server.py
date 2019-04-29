@@ -136,8 +136,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     <form action="chromosomeLength" method="get">
                         Species  <input type="text" name="species">
                         <br>
-                        <input type="submit" value="SEND">
-                        <br><br>
                         Chromosome  <input type="text" name="chromo">
                         <br>
                         <input type="submit" value="SEND">
