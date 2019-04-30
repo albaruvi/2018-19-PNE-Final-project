@@ -2,6 +2,7 @@ import http.server
 import socketserver
 import termcolor
 import requests
+from seq import Seq
 
 # Define the Server's port
 PORT = 8000
@@ -204,12 +205,19 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 </html>"""
 
             if self.path.startswith('/geneSeq?gene='):
-
                 msg_split = self.path.split('=')
                 server = "http://rest.ensembl.org"
+                ext = "/lookup/symbol/homo_sapiens/{}?".format(msg_split[1])
+                r = requests.get(server + ext, headers={"Content-Type": "application/json"})
+                info = r.json()
+                if msg_split[1] == info['display_name']:
+                    msg_split[1] = info['id']
+
+                server = "http://rest.ensembl.org"
                 ext = "/sequence/id/{}?".format(msg_split[1])
-                r = requests.get(server + ext, headers={"Content-Type": "text/plain"})
-                gene_sequence = r.text()
+                r = requests.get(server + ext, headers={"Content-Type": "application/json"})
+                info = r.json()
+                gene_sequence = info['seq']
 
                 contents = """
                         <!DOCTYPE html>
@@ -221,7 +229,146 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         <body>
                             <h1>GENE SEQUENCE</h1>
                             <p> """
-                contents += 'The sequence of the gene ' + msg_split[1] + 'is ' + gene_sequence
+                contents += 'The sequence of the human gene ' + msg_split[1] + ' is ' + gene_sequence
+                contents += """</p>
+                                <a href="main_page">MAIN page</a>
+
+                            </body>
+                            </html>
+                            """
+        elif self.path.startswith('/geneInfo'):
+            contents = """<!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <title>Gene information page</title>
+                </head>
+                <body>
+                    <h1>GENE INFO</h1>
+                    <p>WELCOME TO THE GENE INFO PAGE</p>
+                    <form action="geneInfo" method="get">
+                        Human gene  <input type="text" name="gene">
+                        <br>
+                        <input type="submit" value="SEND">
+                        <br><br>
+                        <br><br>
+                    </form>
+                    <p></p>
+                    <a href="main_page">MAIN page</a>
+                </body>
+                </html>"""
+
+            if self.path.startswith('/geneInfo?gene='):
+
+                msg_split = self.path.split('=')
+                msg_split = self.path.split('=')
+                server = "http://rest.ensembl.org"
+                ext = "/lookup/symbol/homo_sapiens/{}?".format(msg_split[1])
+                r = requests.get(server + ext, headers={"Content-Type": "application/json"})
+                info = r.json()
+                if msg_split[1] == info['display_name']:
+                    msg_split[1] = info['id']
+
+                server = "http://rest.ensembl.org"
+                ext = "/lookup/id/{}?".format(msg_split[1])
+
+                r = requests.get(server + ext, headers={"Content-Type": "application/json"})
+
+                infor = r.json()
+                start = infor['start']
+                end = infor['end']
+                id = infor['id']
+                chromo = infor['seq_region_name']
+
+                contents = """
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <title>Gene information page</title>
+                        </head>
+                        <body>
+                            <h1>GENE INFO</h1>
+                            <p> """
+                contents += 'The start of the human gene ' + msg_split[1] + ' is ' + str(start)
+                contents += '</p></p>'
+                contents += 'The end of the human gene ' + msg_split[1] + ' is ' + str(end)
+                contents += '</p></p>'
+                contents += 'The id of the human gene ' + msg_split[1] + ' is ' + str(id)
+                contents += '</p></p>'
+                contents += 'The chromosome of the human gene ' + msg_split[1] + ' is ' + str(chromo)
+                contents += """</p>
+                                <a href="main_page">MAIN page</a>
+
+                            </body>
+                            </html>
+                            """
+        elif self.path.startswith('/geneCalc'):
+            contents = """<!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <title>Gene calculations page</title>
+                </head>
+                <body>
+                    <h1>GENE CALCULATIONS</h1>
+                    <p>WELCOME TO THE GENE CALCULATIONS PAGE</p>
+                    <form action="geneCalc" method="get">
+                        Human gene  <input type="text" name="gene">
+                        <br>
+                        <input type="submit" value="SEND">
+                        <br><br>
+                        <br><br>
+                    </form>
+                    <p></p>
+                    <a href="main_page">MAIN page</a>
+                </body>
+                </html>"""
+
+            if self.path.startswith('/geneCalc?gene='):
+
+                msg_split = self.path.split('=')
+                msg_split = self.path.split('=')
+                server = "http://rest.ensembl.org"
+                ext = "/lookup/symbol/homo_sapiens/{}?".format(msg_split[1])
+                r = requests.get(server + ext, headers={"Content-Type": "application/json"})
+                info = r.json()
+                if msg_split[1] == info['display_name']:
+                    msg_split[1] = info['id']
+
+                server = "http://rest.ensembl.org"
+                ext = "/sequence/id/{}?".format(msg_split[1])
+                r = requests.get(server + ext, headers={"Content-Type": "application/json"})
+                info = r.json()
+                gene_sequence = info['seq']
+                sequence = Seq(gene_sequence)
+                l1 = str(sequence.len())
+                percentage = sequence.perc_bases()
+                na = str(percentage['As'])
+                nt = str(percentage['Ts'])
+                ng = str(percentage['Gs'])
+                nc = str(percentage['Cs'])
+
+                contents = """
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <title>Gene information page</title>
+                        </head>
+                        <body>
+                            <h1>GENE INFO</h1>
+                            <p> """
+                contents += 'The length of the sequence of the human gene ' + msg_split[1] + ' is ' + l1
+                contents += '</p></p>'
+                contents += 'The percentage of As in the sequence of the human gene ' + msg_split[1] + ' is ' + na + '%'
+                contents += '</p></p>'
+                contents += 'The percentage of Ts in the sequence of the human gene ' + msg_split[1] + ' is ' + nt + '%'
+                contents += '</p></p>'
+                contents += 'The percentage of Gs in the sequence of the human gene ' + msg_split[1] + ' is ' + ng + '%'
+                contents += '</p></p>'
+                contents += 'The percentage of Cs in the sequence of the human gene ' + msg_split[1] + ' is ' + nc + '%'
+
                 contents += """</p>
                                 <a href="main_page">MAIN page</a>
 
