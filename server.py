@@ -84,7 +84,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     <h1>KARYOTYPE</h1>
                     <p>WELCOME TO THE KARYOTYPE PAGE</p>
                     <form action="karyotype" method="get">
-                        Species  <input type="text" name="species">
+                        Species  <input type="text" name="specie">
                         <br>
                         <input type="submit" value="SEND">
                         <br><br>
@@ -95,7 +95,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 </body>
                 </html>"""
 
-            if self.path.startswith('/karyotype?species='):
+            if self.path.startswith('/karyotype?specie='):
 
                 msg_split = self.path.split('=')
                 server = "http://rest.ensembl.org"
@@ -146,7 +146,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     <a href="main_page">MAIN page</a>
                 </body>
                 </html>"""
-            if self.path.startswith('/chromosomeLength?species='):
+            if self.path.startswith('/chromosomeLength?specie='):
                 msg_split = self.path.split('=')
                 msg_split2 = []
                 for i in msg_split:
