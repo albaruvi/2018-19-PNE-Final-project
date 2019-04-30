@@ -5,7 +5,7 @@ import requests
 
 # Define the Server's port
 PORT = 8000
-
+socketserver.TCPServer.allow_reuse_address = True
 
 class TestHandler(http.server.BaseHTTPRequestHandler):
 
@@ -181,7 +181,53 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                             </body>
                                             </html>
                                             """
+        elif self.path.startswith('/geneSeq'):
+            contents = """<!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <title>Gene sequence page</title>
+                </head>
+                <body>
+                    <h1>GENE SEQUENCE</h1>
+                    <p>WELCOME TO THE GENE SEQUENCE PAGE</p>
+                    <form action="geneSeq" method="get">
+                        Human gene  <input type="text" name="gene">
+                        <br>
+                        <input type="submit" value="SEND">
+                        <br><br>
+                        <br><br>
+                    </form>
+                    <p></p>
+                    <a href="main_page">MAIN page</a>
+                </body>
+                </html>"""
 
+            if self.path.startswith('/geneSeq?gene='):
+
+                msg_split = self.path.split('=')
+                server = "http://rest.ensembl.org"
+                ext = "/sequence/id/{}?".format(msg_split[1])
+                r = requests.get(server + ext, headers={"Content-Type": "text/plain"})
+                gene_sequence = r.text()
+
+                contents = """
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <title>Gene sequence page</title>
+                        </head>
+                        <body>
+                            <h1>GENE SEQUENCE</h1>
+                            <p> """
+                contents += 'The sequence of the gene ' + msg_split[1] + 'is ' + gene_sequence
+                contents += """</p>
+                                <a href="main_page">MAIN page</a>
+
+                            </body>
+                            </html>
+                            """
         else:
             filename = open('error.html', 'r')
             contents = filename.read()
