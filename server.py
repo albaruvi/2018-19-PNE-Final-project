@@ -18,6 +18,11 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             filename = open('main_page.html', 'r')
             contents = filename.read()
         elif self.path.startswith('/listSpecies'):
+            server = "http://rest.ensembl.org"
+            ext = "/info/species?"
+            r = requests.get(server + ext, headers={"Content-Type": "application/json"})
+            information = r.json()
+            species = information['species']
             contents = """<!DOCTYPE html>
                             <html lang="en">
                             <head>
@@ -27,24 +32,22 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                             <body>
                                 <h1>LIST OF SPECIES</h1>
                                 <p>WELCOME TO THE LIST OF SPECIES PAGE</p>
-                                <p>If you prefer to see the whole list of species just click the send button</p>
+                                <p>If you prefer to see a limited amount of species </p>
                                 <form action="listSpecies" method="get">
                                     Number of species  <input type="text" name="limit">
                                     <br>
                                     <input type="submit" value="SEND">
                                     <br><br>
-                                </form>
-                                <p></p>
+                                </form>"""
+            contents += 'Species: ''<p>'
+            for i in species:
+                contents += '<p>' + i['name'] + '<p>'
+            contents += """<p></p>
                                 <a href="main_page">MAIN page</a>
                             </body>
                             </html>"""
             if self.path.startswith('/listSpecies?limit='):
 
-                server = "http://rest.ensembl.org"
-                ext = "/info/species?"
-                r = requests.get(server + ext, headers={"Content-Type": "application/json"})
-                information = r.json()
-                species = information['species']
                 msg_split = self.path.split('=')
 
                 contents = """
