@@ -261,7 +261,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             if self.path.startswith('/geneInfo?gene='):
 
                 msg_split = self.path.split('=')
-                msg_split = self.path.split('=')
                 server = "http://rest.ensembl.org"
                 ext = "/lookup/symbol/homo_sapiens/{}?".format(msg_split[1])
                 r = requests.get(server + ext, headers={"Content-Type": "application/json"})
@@ -328,7 +327,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             if self.path.startswith('/geneCalc?gene='):
 
                 msg_split = self.path.split('=')
-                msg_split = self.path.split('=')
                 server = "http://rest.ensembl.org"
                 ext = "/lookup/symbol/homo_sapiens/{}?".format(msg_split[1])
                 r = requests.get(server + ext, headers={"Content-Type": "application/json"})
@@ -375,6 +373,63 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                             </body>
                             </html>
                             """
+        elif self.path.startswith('/geneList'):
+            contents = """<!DOCTYPE html>
+                       <html lang="en">
+                       <head>
+                           <meta charset="UTF-8">
+                           <title>Gene List page</title>
+                       </head>
+                       <body>
+                           <h1>GENE LIST</h1>
+                           <p>WELCOME TO THE GENE LIST PAGE</p>
+                           <form action="geneList" method="get">
+                               Human chromosome  <input type="text" name="chromo">
+                               <br>
+                               Start  <input type="text" name="start">
+                               <br>
+                               End  <input type="text" name="end">
+                               <br>
+                               <input type="submit" value="SEND">
+                               <br><br>
+                               <br><br>
+                           </form>
+                           <p></p>
+                           <a href="main_page">MAIN page</a>
+                       </body>
+                       </html>"""
+
+            if self.path.startswith('/geneList?chromo='):
+                msg_split = self.path.split('=')
+                msg_split2 = []
+                for i in msg_split:
+                    msg_split2 += i.split('&')
+
+                server = "http://rest.ensembl.org"
+                ext = "/overlap/region/human/" + str(msg_split2[1]) + ":" + msg_split2[3] + "-" + msg_split2[5] + "?feature=gene;feature=transcript;feature=cds;feature=exon"
+                r = requests.get(server + ext, headers={"Content-Type": "application/json"})
+                inform = r.json()
+
+                contents = """
+                               <!DOCTYPE html>
+                               <html lang="en">
+                               <head>
+                                   <meta charset="UTF-8">
+                                   <title>Gene sequence page</title>
+                               </head>
+                               <body>
+                                   <h1>GENE SEQUENCE</h1>
+                                   <p> """
+                contents += 'The genes in the chromosome ' + msg_split2[1] + ' of the homo sapiens '
+                contents += ' between ' + msg_split2[3] + ' and ' + msg_split2[5] + ' are: '
+                for i in inform:
+                    contents += '<p>' + i['id'] + '<p>'
+                contents += """</p>
+                                       <a href="main_page">MAIN page</a>
+
+                                   </body>
+                                   </html>
+                                   """
         else:
             filename = open('error.html', 'r')
             contents = filename.read()
