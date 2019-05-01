@@ -18,6 +18,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         if self.path == '/main_page' or self.path == '/':
             filename = open('main_page.html', 'r')
             contents = filename.read()
+# List the names of all the species available in the database.
         elif self.path.startswith('/listSpecies'):
             server = "http://rest.ensembl.org"
             ext = "/info/species?"
@@ -77,6 +78,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                             </body>
                             </html>
                             """
+# Return information about the karyotype of a specie: The name (usually a number) of all the chromosomes
         elif self.path.startswith('/karyotype'):
             contents = """<!DOCTYPE html>
                 <html lang="en">
@@ -127,6 +129,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                             </body>
                             </html>
                             """
+# Return the Length of the chromosome named "chromo" of the given specie
         elif self.path.startswith('/chromosomeLength'):
             contents = """<!DOCTYPE html>
                 <html lang="en">
@@ -182,6 +185,8 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                             </body>
                                             </html>
                                             """
+# MEDIUM LEVEL
+# Return the sequence of a given human gene
         elif self.path.startswith('/geneSeq'):
             contents = """<!DOCTYPE html>
                 <html lang="en">
@@ -236,6 +241,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                             </body>
                             </html>
                             """
+# Return information about a human gene: start, end, Length, id and Chromosome
         elif self.path.startswith('/geneInfo'):
             contents = """<!DOCTYPE html>
                 <html lang="en">
@@ -302,6 +308,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                             </body>
                             </html>
                             """
+# Performs some calculations on the given human gene and returns the total length and the percentage of all its bases
         elif self.path.startswith('/geneCalc'):
             contents = """<!DOCTYPE html>
                 <html lang="en">
@@ -373,6 +380,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                             </body>
                             </html>
                             """
+# Return the names of the genes located in the chromosome "chromo" from the start to end positions
         elif self.path.startswith('/geneList'):
             contents = """<!DOCTYPE html>
                        <html lang="en">
@@ -430,6 +438,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                    </body>
                                    </html>
                                    """
+# Error html
         else:
             filename = open('error.html', 'r')
             contents = filename.read()
