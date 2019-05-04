@@ -1,0 +1,123 @@
+
+TEST REPORT FOR THE BASIC LEVEL
+
+WITH THIS ENDPOINT WE GET ACCESS TO THE MAIN PAGE WITH ALL THE OPTIONS
+
+ENDPOINT: http://localhost:8000/main_page
+HTML CODE:
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Main page</title>
+    </head>
+    <body>
+        <h1>MAIN PAGE</h1>
+        <p>WELCOME TO THE MAIN PAGE</p>
+        <p></p>
+        <a href="listSpecies">LIST OF SPECIES</a>
+        <a href="karyotype">KARYOTYPE</a>
+        <a href="chromosomeLength">CHROMOSOME LENGTH</a>
+        <a href="geneSeq">GENE SEQUENCE</a>
+        <a href="geneInfo">GENE INFO</a>
+        <a href="geneCalc">GENE CALCULATIONS</a>
+        <a href="geneList">GENES IN THE CHROMOSOME</a>
+    </body>
+    </html>
+
+THE FOLLOWING ENDPOINT SHOWS THE WHOLE LIST OF SPECIES
+
+ENDPOINT: http://localhost:8000/listSpecies
+HTML CODE:
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>List of species page</title>
+    </head>
+    <body>
+        <h1>LIST OF SPECIES</h1>
+        <p>WELCOME TO THE LIST OF SPECIES PAGE</p>
+        <p>If you prefer to see a limited amount of species </p>
+        <form action="listSpecies" method="get">
+            Number of species  <input type="text" name="limit">
+            <br>
+            <input type="submit" value="SEND">
+            <br><br>
+        </form>Species: <p><p>ficedula_albicollis<p><p>castor_canadensis<p><p>ciona_intestinalis<p><p>pogona_vitticeps<p><p>manacus_vitellinus<p><p>mus_spicilegus<p><p>zonotrichia_albicollis<p><p>dipodomys_ordii<p><p>nomascus_leucogenys<p><p>mus_musculus_fvbnj<p><p>fundulus_heteroclitus<p><p>mus_spretus<p><p>poecilia_reticulata<p><p>amphiprion_ocellaris<p><p>meriones_unguiculatus<p><p>saccharomyces_cerevisiae<p><p>paramormyrops_kingsleyae<p><p>jaculus_jaculus<p><p>mus_musculus_c3hhej<p><p>amphiprion_percula<p><p>erinaceus_europaeus<p><p>phascolarctos_cinereus<p><p>acanthochromis_polyacanthus<p><p>lepidothrix_coronata<p><p>neovison_vison<p><p>cavia_porcellus<p><p>equus_caballus<p><p>dasypus_novemcinctus<p><p>haplochromis_burtoni<p><p>macaca_fascicularis<p><p>coturnix_japonica<p><p>melopsittacus_undulatus<p><p>heterocephalus_glaber_male<p><p>aotus_nancymaae<p><p>ursus_maritimus<p><p>prolemur_simus<p><p>poecilia_latipinna<p><p>kryptolebias_marmoratus<p><p>apteryx_haastii<p><p>salvator_merianae<p><p>propithecus_coquereli<p><p>equus_asinus_asinus<p><p>cavia_aperea<p><p>anas_platyrhynchos_platyrhynchos<p><p>danio_rerio<p><p>peromyscus_maniculatus_bairdii<p><p>serinus_canaria<p><p>mesocricetus_auratus<p><p>ictalurus_punctatus<p><p>gambusia_affinis<p><p>monopterus_albus<p><p>lonchura_striata_domestica<p><p>felis_catus<p><p>ornithorhynchus_anatinus<p><p>apteryx_owenii<p><p>sphenodon_punctatus<p><p>poecilia_mexicana<p><p>drosophila_melanogaster<p><p>sarcophilus_harrisii<p><p>maylandia_zebra<p><p>mus_musculus_wsbeij<p><p>labrus_bergylta<p><p>parus_major<p><p>numida_meleagris<p><p>petromyzon_marinus<p><p>lepisosteus_oculatus<p><p>xiphophorus_couchianus<p><p>nannospalax_galili<p><p>ochotona_princeps<p><p>choloepus_hoffmanni<p><p>pan_troglodytes<p><p>saimiri_boliviensis_boliviensis<p><p>mustela_putorius_furo<p><p>gopherus_agassizii<p><p>urocitellus_parryii<p><p>mus_musculus_pwkphj<p><p>oryzias_latipes<p><p>pteropus_vampyrus<p><p>chelonoidis_abingdonii<p><p>rhinopithecus_bieti<p><p>astyanax_mexicanus<p><p>neolamprologus_brichardi<p><p>mus_musculus_casteij<p><p>echinops_telfairi<p><p>taeniopygia_guttata<p><p>loxodonta_africana<p><p>cebus_capucinus<p><p>anolis_carolinensis<p><p>ailuropoda_melanoleuca<p><p>spermophilus_dauricus<p><p>sus_scrofa<p><p>mus_musculus<p><p>mus_musculus_nzohlltj<p><p>calidris_pygmaea<p><p>notamacropus_eugenii<p><p>hippocampus_comes<p><p>bos_taurus<p><p>bison_bison_bison<p><p>mus_musculus_aj<p><p>oryzias_latipes_hsok<p><p>pan_paniscus<p><p>gorilla_gorilla<p><p>dromaius_novaehollandiae<p><p>apteryx_rowi<p><p>canis_familiaris<p><p>nothoprocta_perdicaria<p><p>cyprinodon_variegatus<p><p>cricetulus_griseus_picr<p><p>vicugna_pacos<p><p>cyanistes_caeruleus<p><p>mastacembelus_armatus<p><p>macaca_nemestrina<p><p>mus_caroli<p><p>colobus_angolensis_palliatus<p><p>ovis_aries<p><p>mandrillus_leucophaeus<p><p>astatotilapia_calliptera<p><p>oryzias_latipes_hni<p><p>gadus_morhua<p><p>eptatretus_burgeri<p><p>carlito_syrichta<p><p>oryzias_melastigma<p><p>cercocebus_atys<p><p>gasterosteus_aculeatus<p><p>poecilia_formosa<p><p>mus_musculus_dba2j<p><p>mus_musculus_c57bl6nj<p><p>junco_hyemalis<p><p>cricetulus_griseus_chok1gshd<p><p>xenopus_tropicalis<p><p>canis_lupus_dingo<p><p>tursiops_truncatus<p><p>piliocolobus_tephrosceles<p><p>pygocentrus_nattereri<p><p>microcebus_murinus<p><p>amphilophus_citrinellus<p><p>caenorhabditis_elegans<p><p>tetraodon_nigroviridis<p><p>pundamilia_nyererei<p><p>xiphophorus_maculatus<p><p>mus_pahari<p><p>cricetulus_griseus_crigri<p><p>chinchilla_lanigera<p><p>procavia_capensis<p><p>mus_musculus_balbcj<p><p>heterocephalus_glaber_female<p><p>calidris_pugnax<p><p>chlorocebus_sabaeus<p><p>capra_hircus<p><p>otolemur_garnettii<p><p>latimeria_chalumnae<p><p>anser_brachyrhynchus<p><p>macaca_mulatta<p><p>callithrix_jacchus<p><p>scophthalmus_maximus<p><p>periophthalmus_magnuspinnatus<p><p>pelodiscus_sinensis<p><p>panthera_pardus<p><p>octodon_degus<p><p>anabas_testudineus<p><p>cynoglossus_semilaevis<p><p>notechis_scutatus<p><p>mus_musculus_cbaj<p><p>oreochromis_niloticus<p><p>theropithecus_gelada<p><p>microtus_ochrogaster<p><p>takifugu_rubripes<p><p>crocodylus_porosus<p><p>oryctolagus_cuniculus<p><p>bos_mutus<p><p>vulpes_vulpes<p><p>stegastes_partitus<p><p>sorex_araneus<p><p>mus_musculus_akrj<p><p>seriola_dumerili<p><p>gallus_gallus<p><p>mus_musculus_nodshiltj<p><p>chrysemys_picta_bellii<p><p>papio_anubis<p><p>marmota_marmota_marmota<p><p>pongo_abelii<p><p>scleropages_formosus<p><p>ictidomys_tridecemlineatus<p><p>ciona_savignyi<p><p>rhinopithecus_roxellana<p><p>esox_lucius<p><p>meleagris_gallopavo<p><p>mus_musculus_lpj<p><p>fukomys_damarensis<p><p>panthera_tigris_altaica<p><p>seriola_lalandi_dorsalis<p><p>mola_mola<p><p>ursus_americanus<p><p>tupaia_belangeri<p><p>monodelphis_domestica<p><p>rattus_norvegicus<p><p>mus_musculus_129s1svimj<p><p>homo_sapiens<p><p>myotis_lucifugus<p><p></p>
+        <a href="main_page">MAIN page</a>
+    </body>
+    </html>
+
+IF WE SELECT A LIMIT OF SPECIES THIS IS THE ENDPOINT
+
+ENDPOINT: http://localhost:8000/listSpecies?limit=8
+HTML CODE:
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>listSpecies</title>
+    </head>
+    <body>
+        <h1>LIST OF SPECIES</h1>
+        <p> Species: <p><p>ficedula_albicollis<p><p>castor_canadensis<p><p>ciona_intestinalis<p><p>pogona_vitticeps<p><p>manacus_vitellinus<p><p>mus_spicilegus<p><p>zonotrichia_albicollis<p><p>dipodomys_ordii<p><p>
+<p></p>
+            <a href="main_page">MAIN page</a>
+
+        </body>
+        </html>
+
+WITH THIS ENDPOINT WE GET THE KARYOTYPE OF THE HOMO SAPIENS
+
+ENDPOINT: http://localhost:8000/karyotype?specie=homo_sapiens
+HTML CODE:
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>karyotype</title>
+    </head>
+    <body>
+        <h1>KARYOTYPE</h1>
+        <p> The karyotype of homo_sapiens is: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X Y MT </p>
+            <a href="main_page">MAIN page</a>
+
+        </body>
+        </html>
+
+WITH THIS ENDPOINT WE GET THE LENGTH OF THE CHROMOSOME 9 OF THE HOMO SAPIENS
+
+ENDPOINT: http://localhost:8000/chromosomeLength?specie=homo_sapiens&chromo=9
+HTML CODE:
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Chromosome length page</title>
+    </head>
+    <body>
+        <h1>CHROMOSOME LENGTH PAGE</h1>
+        <p> The length of the chromosome 9 from the species homo_sapiens is 138394717</p>
+            <a href="main_page">MAIN page</a>
+
+        </body>
+        </html>
+
+ERROR HTML
+
+ENDPOINT EXAMPLE: http://localhost:8000/geneL
+HTML CODE:
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Error page</title>
+    </head>
+    <body style= "background-color: tomato">
+        <h1>ERROR PAGE</h1>
+        <p>WELCOME TO THE ERROR PAGE</p>
+        <p></p>
+        <a href="main_page">MAIN page</a>
+    </body>
+    </html>
