@@ -216,10 +216,10 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 r = requests.get(server + ext, headers={"Content-Type": "application/json"})
                 info = r.json()
                 if msg_split[1] == info['display_name']:
-                    msg_split[1] = info['id']
+                    identification = info['id']
 
                 server = "http://rest.ensembl.org"
-                ext = "/sequence/id/{}?".format(msg_split[1])
+                ext = "/sequence/id/{}?".format(identification)
                 r = requests.get(server + ext, headers={"Content-Type": "application/json"})
                 info = r.json()
                 gene_sequence = info['seq']
@@ -272,10 +272,10 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 r = requests.get(server + ext, headers={"Content-Type": "application/json"})
                 info = r.json()
                 if msg_split[1] == info['display_name']:
-                    msg_split[1] = info['id']
+                    identification = info['id']
 
                 server = "http://rest.ensembl.org"
-                ext = "/lookup/id/{}?".format(msg_split[1])
+                ext = "/lookup/id/{}?".format(identification)
 
                 r = requests.get(server + ext, headers={"Content-Type": "application/json"})
 
@@ -339,10 +339,10 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 r = requests.get(server + ext, headers={"Content-Type": "application/json"})
                 info = r.json()
                 if msg_split[1] == info['display_name']:
-                    msg_split[1] = info['id']
+                    identification = info['id']
 
                 server = "http://rest.ensembl.org"
-                ext = "/sequence/id/{}?".format(msg_split[1])
+                ext = "/sequence/id/{}?".format(identification)
                 r = requests.get(server + ext, headers={"Content-Type": "application/json"})
                 info = r.json()
                 gene_sequence = info['seq']
@@ -428,7 +428,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                <body>
                                    <h1>GENE SEQUENCE</h1>
                                    <p> """
-                contents += 'The genes in the chromosome ' + msg_split2[1] + ' of the homo sapiens '
+                contents += 'The genes (ID) in the chromosome ' + msg_split2[1] + ' of the homo sapiens '
                 contents += ' between ' + msg_split2[3] + ' and ' + msg_split2[5] + ' are: '
                 for i in inform:
                     contents += '<p>' + i['id'] + '<p>'
