@@ -26,6 +26,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 r = requests.get(server + ext, headers={"Content-Type": "application/json"})
                 information = r.json()
                 species = information['species']
+                len1 = len(species)
                 contents = """<!DOCTYPE html>
                                 <html lang="en">
                                 <head>
@@ -65,7 +66,11 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                 <p> """
                     contents += 'Species: ''<p>'
                     counter = 0
+
                     for i in species:
+                        if len1 < int(msg_split[1]) or int(msg_split[1]) < 0:
+                            contents += '<p>' + 'YOU ENTERED A NUMBER NOT VALID' + '<p>'
+                            break
                         contents += '<p>' + i['name'] + '<p>'
                         counter += 1
                         if str(counter) == msg_split[1]:
@@ -415,7 +420,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         msg_split2 += i.split('&')
 
                     server = "http://rest.ensembl.org"
-                    ext = "/overlap/region/human/" + str(msg_split2[1]) + ":" + msg_split2[3] + "-" + msg_split2[5] + "?feature=gene;feature=transcript;feature=cds;feature=exon"
+                    ext = "/overlap/region/human/" + str(msg_split2[1]) + ":" + msg_split2[3] + "-" + msg_split2[5] + "?feature=gene"
                     r = requests.get(server + ext, headers={"Content-Type": "application/json"})
                     inform = r.json()
 
@@ -432,7 +437,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     contents += 'The genes (ID) in the chromosome ' + msg_split2[1] + ' of the homo sapiens '
                     contents += ' between ' + msg_split2[3] + ' and ' + msg_split2[5] + ' are: '
                     for i in inform:
-                        contents += '<p>' + i['id'] + '<p>'
+                        contents += '<p>' + i['external_name'] + '<p>'
                     contents += """</p>
                                            <a href="main_page">MAIN page</a>
     
@@ -457,6 +462,20 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
             return
         except KeyError:
+            filename = open('error.html', 'r')
+            contents = filename.read()
+
+            self.send_response(200)  # -- Status line: OK!
+
+            # Define the content-type header:
+            self.send_header("Content-Type", "text/html\r\n")
+
+            # The header is finished
+            self.end_headers()
+
+            # Send the response message
+            self.wfile.write(str.encode(contents))
+        except ValueError:
             filename = open('error.html', 'r')
             contents = filename.read()
 
