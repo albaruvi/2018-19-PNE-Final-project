@@ -1,6 +1,252 @@
 
 TEXT REPORT MEDIUM LEVEL
 
+
+WITH THIS ENDPOINT WE GET ACCESS TO THE MAIN PAGE WITH ALL THE OPTIONS
+
+ENDPOINT: http://localhost:8000/main_page
+HTML CODE:
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Main page</title>
+    </head>
+    <body>
+        <h1>MAIN PAGE</h1>
+        <p>WELCOME TO THE MAIN PAGE</p>
+        <p></p>
+        <a href="listSpecies">LIST OF SPECIES</a><br>
+        <a href="karyotype">KARYOTYPE</a><br>
+        <a href="chromosomeLength">CHROMOSOME LENGTH</a><br>
+        <a href="geneSeq">GENE SEQUENCE</a><br>
+        <a href="geneInfo">GENE INFO</a><br>
+        <a href="geneCalc">GENE CALCULATIONS</a><br>
+        <a href="geneList">GENES IN THE CHROMOSOME</a><br>
+    </body>
+    </html>
+
+________________________________________________________________________________________________________________________
+
+OPTION LIST OF SPECIES:
+
+server = "http://rest.ensembl.org"
+ext = "/info/species?"
+
+THE FOLLOWING ENDPOINT SHOWS THE WHOLE LIST OF SPECIES
+
+ENDPOINT: http://localhost:8000/listSpecies
+HTML CODE:
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>List of species page</title>
+    </head>
+    <body>
+        <h1>LIST OF SPECIES</h1>
+        <p>WELCOME TO THE LIST OF SPECIES PAGE</p>
+        <p>If you prefer to see a limited amount of species </p>
+        <form action="listSpecies" method="get">
+            Number of species  <input type="text" name="limit">
+            <br>
+            <input type="submit" value="SEND">
+            <br><br>
+        </form>Species: <p><p>mus_musculus<p><p>homo_sapiens<p><p>cavia_porcellus<p><p>mus_musculus_cbaj<p><p>amphilophus_citrinellus<p><p>anolis_carolinensis<p><p>cebus_capucinus<p><p>labrus_bergylta<p><p>panthera_pardus<p><p>takifugu_rubripes<p><p>rhinopithecus_bieti<p><p>mastacembelus_armatus<p><p>lepidothrix_coronata<p><p>fukomys_damarensis<p><p>monodelphis_domestica<p><p>equus_asinus_asinus<p><p>xiphophorus_maculatus<p><p>apteryx_owenii<p><p>calidris_pugnax<p><p>gasterosteus_aculeatus<p><p>cricetulus_griseus_picr<p><p>mus_spicilegus<p><p>oryzias_melastigma<p><p>nannospalax_galili<p><p>chelonoidis_abingdonii<p><p>acanthochromis_polyacanthus<p><p>scleropages_formosus<p><p>sarcophilus_harrisii<p><p>gallus_gallus<p><p>latimeria_chalumnae<p><p>numida_meleagris<p><p>mus_musculus_aj<p><p>poecilia_latipinna<p><p>phascolarctos_cinereus<p><p>mus_musculus_fvbnj<p><p>cricetulus_griseus_chok1gshd<p><p>mus_musculus_lpj<p><p>heterocephalus_glaber_female<p><p>calidris_pygmaea<p><p>anas_platyrhynchos_platyrhynchos<p><p>saimiri_boliviensis_boliviensis<p><p>lonchura_striata_domestica<p><p>callithrix_jacchus<p><p>ovis_aries<p><p>papio_anubis<p><p>macaca_fascicularis<p><p>notechis_scutatus<p><p>capra_hircus<p><p>fundulus_heteroclitus<p><p>ursus_americanus<p><p>mus_musculus_nzohlltj<p><p>notamacropus_eugenii<p><p>tursiops_truncatus<p><p>gambusia_affinis<p><p>felis_catus<p><p>pan_paniscus<p><p>nomascus_leucogenys<p><p>chlorocebus_sabaeus<p><p>bos_taurus<p><p>amphiprion_ocellaris<p><p>mus_pahari<p><p>coturnix_japonica<p><p>carlito_syrichta<p><p>apteryx_haastii<p><p>macaca_nemestrina<p><p>sphenodon_punctatus<p><p>anser_brachyrhynchus<p><p>anabas_testudineus<p><p>lepisosteus_oculatus<p><p>rhinopithecus_roxellana<p><p>spermophilus_dauricus<p><p>poecilia_formosa<p><p>scophthalmus_maximus<p><p>mus_spretus<p><p>petromyzon_marinus<p><p>xenopus_tropicalis<p><p>gopherus_agassizii<p><p>bison_bison_bison<p><p>mus_musculus_129s1svimj<p><p>ictalurus_punctatus<p><p>octodon_degus<p><p>colobus_angolensis_palliatus<p><p>manacus_vitellinus<p><p>astatotilapia_calliptera<p><p>prolemur_simus<p><p>mus_musculus_wsbeij<p><p>dasypus_novemcinctus<p><p>kryptolebias_marmoratus<p><p>mus_musculus_dba2j<p><p>urocitellus_parryii<p><p>gorilla_gorilla<p><p>microcebus_murinus<p><p>mandrillus_leucophaeus<p><p>pogona_vitticeps<p><p>neovison_vison<p><p>parus_major<p><p>macaca_mulatta<p><p>ornithorhynchus_anatinus<p><p>oryzias_latipes_hni<p><p>eptatretus_burgeri<p><p>canis_lupus_dingo<p><p>danio_rerio<p><p>mus_musculus_nodshiltj<p><p>stegastes_partitus<p><p>chinchilla_lanigera<p><p>mus_musculus_c57bl6nj<p><p>astyanax_mexicanus<p><p>ictidomys_tridecemlineatus<p><p>vicugna_pacos<p><p>crocodylus_porosus<p><p>zonotrichia_albicollis<p><p>amphiprion_percula<p><p>panthera_tigris_altaica<p><p>meleagris_gallopavo<p><p>piliocolobus_tephrosceles<p><p>marmota_marmota_marmota<p><p>serinus_canaria<p><p>apteryx_rowi<p><p>salvator_merianae<p><p>choloepus_hoffmanni<p><p>mus_caroli<p><p>sorex_araneus<p><p>taeniopygia_guttata<p><p>theropithecus_gelada<p><p>hippocampus_comes<p><p>cavia_aperea<p><p>periophthalmus_magnuspinnatus<p><p>aotus_nancymaae<p><p>myotis_lucifugus<p><p>sus_scrofa<p><p>propithecus_coquereli<p><p>drosophila_melanogaster<p><p>pundamilia_nyererei<p><p>echinops_telfairi<p><p>junco_hyemalis<p><p>vulpes_vulpes<p><p>pan_troglodytes<p><p>cricetulus_griseus_crigri<p><p>seriola_dumerili<p><p>erinaceus_europaeus<p><p>loxodonta_africana<p><p>neolamprologus_brichardi<p><p>pelodiscus_sinensis<p><p>microtus_ochrogaster<p><p>mola_mola<p><p>ursus_maritimus<p><p>dromaius_novaehollandiae<p><p>oryctolagus_cuniculus<p><p>xiphophorus_couchianus<p><p>cyprinodon_variegatus<p><p>ciona_intestinalis<p><p>pygocentrus_nattereri<p><p>esox_lucius<p><p>ochotona_princeps<p><p>mustela_putorius_furo<p><p>ciona_savignyi<p><p>meriones_unguiculatus<p><p>paramormyrops_kingsleyae<p><p>jaculus_jaculus<p><p>dipodomys_ordii<p><p>cercocebus_atys<p><p>oreochromis_niloticus<p><p>pongo_abelii<p><p>chrysemys_picta_bellii<p><p>maylandia_zebra<p><p>equus_caballus<p><p>mesocricetus_auratus<p><p>pteropus_vampyrus<p><p>seriola_lalandi_dorsalis<p><p>cyanistes_caeruleus<p><p>mus_musculus_pwkphj<p><p>gadus_morhua<p><p>haplochromis_burtoni<p><p>saccharomyces_cerevisiae<p><p>cynoglossus_semilaevis<p><p>canis_familiaris<p><p>monopterus_albus<p><p>ailuropoda_melanoleuca<p><p>castor_canadensis<p><p>melopsittacus_undulatus<p><p>peromyscus_maniculatus_bairdii<p><p>ficedula_albicollis<p><p>bos_mutus<p><p>mus_musculus_balbcj<p><p>mus_musculus_casteij<p><p>rattus_norvegicus<p><p>otolemur_garnettii<p><p>heterocephalus_glaber_male<p><p>caenorhabditis_elegans<p><p>poecilia_reticulata<p><p>oryzias_latipes_hsok<p><p>tetraodon_nigroviridis<p><p>nothoprocta_perdicaria<p><p>tupaia_belangeri<p><p>mus_musculus_c3hhej<p><p>poecilia_mexicana<p><p>oryzias_latipes<p><p>procavia_capensis<p><p>mus_musculus_akrj<p><p></p>
+        <a href="main_page">MAIN page</a>
+    </body>
+    </html>
+
+IF WE SELECT A LIMIT OF SPECIES VALID (8) THIS IS THE ENDPOINT
+
+ENDPOINT: http://localhost:8000/listSpecies?limit=8
+HTML CODE:
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>listSpecies</title>
+    </head>
+    <body>
+        <h1>LIST OF SPECIES</h1>
+        <p> Species: <p><p>ficedula_albicollis<p><p>castor_canadensis<p><p>ciona_intestinalis<p><p>pogona_vitticeps<p><p>manacus_vitellinus<p><p>mus_spicilegus<p><p>zonotrichia_albicollis<p><p>dipodomys_ordii<p><p>
+<p></p>
+            <a href="main_page">MAIN page</a>
+
+        </body>
+        </html>
+
+IF WE SELECT A LIMIT OF SPECIES VALID (13) THIS IS THE ENDPOINT
+
+ENDPOINT: http://localhost:8000/listSpecies?limit=13
+HTML CODE:
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>listSpecies</title>
+    </head>
+    <body>
+        <h1>LIST OF SPECIES</h1>
+        <p> Species: <p><p>ficedula_albicollis<p><p>castor_canadensis<p><p>ciona_intestinalis<p><p>pogona_vitticeps<p><p>manacus_vitellinus<p><p>mus_spicilegus<p><p>zonotrichia_albicollis<p><p>dipodomys_ordii<p><p>nomascus_leucogenys<p><p>mus_musculus_fvbnj<p><p>fundulus_heteroclitus<p><p>mus_spretus<p><p>poecilia_reticulata<p><p>
+<p></p>
+            <a href="main_page">MAIN page</a>
+
+        </body>
+        </html>
+
+
+IF WE SELECT A LIMIT OF SPECIES NOT VALID (HIGHER NUMBER THAN THE NUMBER OF SPECIES) THIS IS THE ENDPOINT
+
+ENDPOINT: http://localhost:8000/listSpecies?limit=870667667
+HTML CODE:
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>listSpecies</title>
+    </head>
+    <body>
+        <h1>LIST OF SPECIES</h1>
+        <p> Species: <p><p>YOU ENTERED A NUMBER NOT VALID<p><p>
+        <p></p>
+            <a href="main_page">MAIN page</a>
+
+        </body>
+        </html>
+
+________________________________________________________________________________________________________________________
+
+OPTION: KARYOTYPE
+
+server = "http://rest.ensembl.org"
+ext = "/info/assembly/{}?".format(SPECIES)
+
+WITH THIS ENDPOINT WE GET THE KARYOTYPE OF THE HOMO SAPIENS
+
+ENDPOINT: http://localhost:8000/karyotype?specie=homo_sapiens
+HTML CODE:
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>karyotype</title>
+    </head>
+    <body>
+        <h1>KARYOTYPE</h1>
+        <p> The karyotype of homo_sapiens is: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 X Y MT </p>
+            <a href="main_page">MAIN page</a>
+
+        </body>
+        </html>
+
+WITH THIS ENDPOINT WE GET THE KARYOTYPE OF THE MOUSE
+
+ENDPOINT: view-source:http://localhost:8000/karyotype?specie=mouse
+HTML CODE:
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>karyotype</title>
+    </head>
+    <body>
+        <h1>KARYOTYPE</h1>
+        <p> The karyotype of mouse is: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 X Y MT </p>
+            <a href="main_page">MAIN page</a>
+
+        </body>
+        </html>
+
+THIS IS AN EXAMPLE OF A SPECIES NOT VALID (ERROR PAGE)
+
+ENDPOINT: http://localhost:8000/karyotype?specie=SSHG
+HTML CODE:
+        <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Error page</title>
+    </head>
+    <body style= "background-color: tomato">
+        <h1>ERROR PAGE</h1>
+        <p>WELCOME TO THE ERROR PAGE</p>
+        <p></p>
+        <a href="main_page">MAIN page</a>
+    </body>
+    </html>
+
+________________________________________________________________________________________________________________________
+
+OPTION: CHROMOSOME LENGTH
+
+server = "http://rest.ensembl.org"
+ext = "/info/assembly/{}?".format(msg_split2[1])
+
+WITH THIS ENDPOINT WE GET THE LENGTH OF THE CHROMOSOME 9 OF THE HOMO SAPIENS
+
+ENDPOINT: http://localhost:8000/chromosomeLength?specie=homo_sapiens&chromo=9
+HTML CODE:
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Chromosome length page</title>
+    </head>
+    <body>
+        <h1>CHROMOSOME LENGTH PAGE</h1>
+        <p> The length of the chromosome 9 from the species homo_sapiens is 138394717</p>
+            <a href="main_page">MAIN page</a>
+
+        </body>
+        </html>
+
+IF WE INTRODUCE A CHROMOSOME NOT FROM THE SPECIES (OR A SPECIES NOT VALID) WE GET THE ERROR PAGE:
+
+ENDPOINT: http://localhost:8000/chromosomeLength?specie=homo_sapiens&chromo=56
+HTML CODE:
+     <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Error page</title>
+    </head>
+    <body style= "background-color: tomato">
+        <h1>ERROR PAGE</h1>
+        <p>WELCOME TO THE ERROR PAGE</p>
+        <p></p>
+        <a href="main_page">MAIN page</a>
+    </body>
+    </html>
+
+________________________________________________________________________________________________________________________
+
+ERROR HTML
+
+ENDPOINT EXAMPLE: http://localhost:8000/geneL
+HTML CODE:
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Error page</title>
+    </head>
+    <body style= "background-color: tomato">
+        <h1>ERROR PAGE</h1>
+        <p>WELCOME TO THE ERROR PAGE</p>
+        <p></p>
+        <a href="main_page">MAIN page</a>
+    </body>
+    </html>
+
+________________________________________________________________________________________________________________________
+
+OPTION: GENE SEQUENCE
+
+server = "http://rest.ensembl.org"
+ext = "/sequence/id/{}?".format(identification)
+
 WITH THIS ENDPOINT WE GET THE GENE SEQUENCE OF THE HUMAN GENE FRAT1
 
 ENDPOINT: http://localhost:8000/geneSeq?gene=FRAT1
@@ -19,6 +265,30 @@ HTML CODE:
         </body>
         </html>
 
+IF WE INTRODUCE A GENE NOT FOUND WE GET THE ERROR PAGE
+
+ENDPOINT: http://localhost:8000/geneSeq?gene=FRAT3
+HTML CODE:
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Error page</title>
+    </head>
+    <body style= "background-color: tomato">
+        <h1>ERROR PAGE</h1>
+        <p>WELCOME TO THE ERROR PAGE</p>
+        <p></p>
+        <a href="main_page">MAIN page</a>
+    </body>
+    </html>
+________________________________________________________________________________________________________________________
+
+OPTION: GENE INFO
+
+server = "http://rest.ensembl.org"
+ext = "/lookup/symbol/homo_sapiens/{}?".format(GENE)
+
 WITH THIS ENDPOINT WE GET THE INFORMATION OF THE GENE FRAT1 OF THE HUMAN GENE
 
 ENDPOINT: http://localhost:8000/geneInfo?gene=FRAT1
@@ -31,11 +301,20 @@ HTML CODE:
     </head>
     <body>
         <h1>GENE INFO</h1>
-        <p> The start of the human gene FRAT1 is 97319267</p></p>The end of the human gene FRAT1 is 97321915</p></p>The id of the human gene FRAT1 is ENSG00000165879</p></p>The chromosome of the human gene FRAT1 is 10</p>
+        <p> The start of the human gene FRAT1 is 97319267</p></p>The end of the human gene FRAT1 is 97321915</p></p>The id of the human gene FRAT1 is ENSG00000165879</p></p>The length of the human gene FRAT1 is 2648</p></p>The chromosome of the human gene FRAT1 is 10</p>
             <a href="main_page">MAIN page</a>
 
         </body>
         </html>
+
+
+IF WE INTRODUCE A GENE NOT VALID WE GET THE ERROR PAGE
+________________________________________________________________________________________________________________________
+
+OPTION: GENE CALC
+
+server = "http://rest.ensembl.org"
+ext = "/lookup/symbol/homo_sapiens/{}?".format(GENE)
 
 WITH THIS ENDPOINT WE GET THE CALCULATIONS OF THE HUMAN GENE FRAT1
 
@@ -55,23 +334,31 @@ HTML CODE:
         </body>
         </html>
 
+________________________________________________________________________________________________________________________
+
+OPTION: NAMES OF THE GENES
+
+server = "http://rest.ensembl.org"
+ext = "/overlap/region/human/" + CHROMO + ":" + START + "-" + END + "?feature=gene"
+
 WITH THIS ENDPOINT WE GET THE NAMES OF THE GENES LOCATED INSIDE THE HUMAN CHROMOSOME 8 BETWEEN THE START AND THE END
 
 ENDPOINT: http://localhost:8000/geneList?chromo=8&start=140424943&end=140624564
 HTML CODE:
     <!DOCTYPE html>
-       <html lang="en">
-       <head>
-           <meta charset="UTF-8">
-           <title>Gene sequence page</title>
-       </head>
-       <body>
-           <h1>GENE SEQUENCE</h1>
-           <p> The genes (ID) in the chromosome 8 of the homo sapiens  between 140424943 and 140624564 are: <p>ENSG00000167632<p><p>ENSG00000259891<p><p>ENSG00000104472<p><p>ENSG00000123908<p><p>ENSG00000279766<p><p>ENSG00000280326<p><p>ENST00000648948<p><p>ENST00000438773<p><p>ENST00000389328<p><p>ENST00000520857<p><p>ENST00000649035<p><p>ENST00000521944<p><p>ENST00000564464<p><p>ENST00000519533<p><p>ENST00000220913<p><p>ENST00000518971<p><p>ENST00000519618<p><p>ENST00000523569<p><p>ENST00000220592<p><p>ENST00000519980<p><p>ENST00000523609<p><p>ENST00000520628<p><p>ENST00000520412<p><p>ENST00000519347<p><p>ENST00000521325<p><p>ENST00000624190<p><p>ENST00000517293<p><p>ENST00000524328<p><p>ENST00000624905<p><p>ENSP00000498020<p><p>ENSP00000498020<p><p>ENSP00000498020<p><p>ENSP00000498020<p><p>ENSP00000498020<p><p>ENSP00000498020<p><p>ENSP00000498020<p><p>ENSP00000498020<p><p>ENSP00000498020<p><p>ENSP00000498020<p><p>ENSP00000498020<p><p>ENSP00000498020<p><p>ENSP00000498020<p><p>ENSP00000498020<p><p>ENSP00000498020<p><p>ENSP00000498020<p><p>ENSP00000498020<p><p>ENSP00000498020<p><p>ENSP00000498020<p><p>ENSP00000498020<p><p>ENSP00000498020<p><p>ENSP00000498020<p><p>ENSP00000405060<p><p>ENSP00000405060<p><p>ENSP00000405060<p><p>ENSP00000405060<p><p>ENSP00000405060<p><p>ENSP00000405060<p><p>ENSP00000405060<p><p>ENSP00000405060<p><p>ENSP00000405060<p><p>ENSP00000405060<p><p>ENSP00000405060<p><p>ENSP00000405060<p><p>ENSP00000405060<p><p>ENSP00000405060<p><p>ENSP00000405060<p><p>ENSP00000405060<p><p>ENSP00000405060<p><p>ENSP00000405060<p><p>ENSP00000405060<p><p>ENSP00000405060<p><p>ENSP00000405060<p><p>ENSP00000405060<p><p>ENSP00000373979<p><p>ENSP00000373979<p><p>ENSP00000373979<p><p>ENSP00000373979<p><p>ENSP00000373979<p><p>ENSP00000373979<p><p>ENSP00000373979<p><p>ENSP00000373979<p><p>ENSP00000373979<p><p>ENSP00000373979<p><p>ENSP00000373979<p><p>ENSP00000373979<p><p>ENSP00000373979<p><p>ENSP00000373979<p><p>ENSP00000373979<p><p>ENSP00000373979<p><p>ENSP00000373979<p><p>ENSP00000373979<p><p>ENSP00000373979<p><p>ENSP00000373979<p><p>ENSP00000373979<p><p>ENSP00000373979<p><p>ENSP00000373979<p><p>ENSP00000430116<p><p>ENSP00000430116<p><p>ENSP00000430116<p><p>ENSP00000430116<p><p>ENSP00000430116<p><p>ENSP00000430116<p><p>ENSP00000430116<p><p>ENSP00000430116<p><p>ENSP00000430116<p><p>ENSP00000430116<p><p>ENSP00000430116<p><p>ENSP00000430116<p><p>ENSP00000430116<p><p>ENSP00000430116<p><p>ENSP00000430116<p><p>ENSP00000430116<p><p>ENSP00000430116<p><p>ENSP00000430116<p><p>ENSP00000430116<p><p>ENSP00000430116<p><p>ENSP00000430116<p><p>ENSP00000497299<p><p>ENSP00000497299<p><p>ENSP00000497299<p><p>ENSP00000497299<p><p>ENSP00000497299<p><p>ENSP00000497299<p><p>ENSP00000497299<p><p>ENSP00000497299<p><p>ENSP00000497299<p><p>ENSP00000497299<p><p>ENSP00000497299<p><p>ENSP00000497299<p><p>ENSP00000497299<p><p>ENSP00000497299<p><p>ENSP00000497299<p><p>ENSP00000497299<p><p>ENSP00000497299<p><p>ENSP00000497299<p><p>ENSP00000497299<p><p>ENSP00000497299<p><p>ENSP00000497299<p><p>ENSP00000497299<p><p>ENSP00000428697<p><p>ENSP00000428697<p><p>ENSP00000220913<p><p>ENSP00000220913<p><p>ENSP00000220913<p><p>ENSP00000430484<p><p>ENSP00000430484<p><p>ENSP00000430003<p><p>ENSP00000430003<p><p>ENSP00000430003<p><p>ENSP00000220592<p><p>ENSP00000220592<p><p>ENSP00000220592<p><p>ENSP00000220592<p><p>ENSP00000220592<p><p>ENSP00000220592<p><p>ENSP00000220592<p><p>ENSP00000220592<p><p>ENSP00000220592<p><p>ENSP00000220592<p><p>ENSP00000220592<p><p>ENSP00000220592<p><p>ENSP00000220592<p><p>ENSP00000220592<p><p>ENSP00000220592<p><p>ENSP00000220592<p><p>ENSP00000220592<p><p>ENSP00000220592<p><p>ENSP00000220592<p><p>ENSP00000430176<p><p>ENSP00000430176<p><p>ENSP00000430176<p><p>ENSP00000430176<p><p>ENSP00000430176<p><p>ENSP00000430176<p><p>ENSP00000430176<p><p>ENSP00000430176<p><p>ENSP00000430176<p><p>ENSP00000430176<p><p>ENSP00000430176<p><p>ENSP00000430176<p><p>ENSP00000430176<p><p>ENSP00000430176<p><p>ENSP00000430176<p><p>ENSP00000430176<p><p>ENSP00000430176<p><p>ENSP00000430176<p><p>ENSP00000430164<p><p>ENSP00000430164<p><p>ENSP00000430164<p><p>ENSP00000431056<p><p>ENSP00000431056<p><p>ENSE00002091118<p><p>ENSE00003610885<p><p>ENSE00001656124<p><p>ENSE00001115091<p><p>ENSE00001115109<p><p>ENSE00003838303<p><p>ENSE00003610885<p><p>ENSE00001656124<p><p>ENSE00001115091<p><p>ENSE00001115109<p><p>ENSE00001718223<p><p>ENSE00003662382<p><p>ENSE00001656124<p><p>ENSE00001115091<p><p>ENSE00001115109<p><p>ENSE00002118035<p><p>ENSE00001656124<p><p>ENSE00001115091<p><p>ENSE00003832358<p><p>ENSE00003610885<p><p>ENSE00001656124<p><p>ENSE00001115091<p><p>ENSE00001115109<p><p>ENSE00002095748<p><p>ENSE00002583116<p><p>ENSE00002093167<p><p>ENSE00002107593<p><p>ENSE00002092195<p><p>ENSE00000704277<p><p>ENSE00001231189<p><p>ENSE00002116685<p><p>ENSE00002131865<p><p>ENSE00002124159<p><p>ENSE00000704277<p><p>ENSE00002134130<p><p>ENSE00002092038<p><p>ENSE00002124344<p><p>ENSE00003601006<p><p>ENSE00003465478<p><p>ENSE00003544094<p><p>ENSE00003661900<p><p>ENSE00003498594<p><p>ENSE00003660001<p><p>ENSE00003569278<p><p>ENSE00003499669<p><p>ENSE00003468648<p><p>ENSE00003598658<p><p>ENSE00003548954<p><p>ENSE00003679723<p><p>ENSE00003594655<p><p>ENSE00003528791<p><p>ENSE00003641526<p><p>ENSE00003644665<p><p>ENSE00003476350<p><p>ENSE00002573500<p><p>ENSE00003601006<p><p>ENSE00003465478<p><p>ENSE00003544094<p><p>ENSE00003661900<p><p>ENSE00003498594<p><p>ENSE00003660001<p><p>ENSE00003569278<p><p>ENSE00003499669<p><p>ENSE00003468648<p><p>ENSE00003598658<p><p>ENSE00003548954<p><p>ENSE00003679723<p><p>ENSE00003594655<p><p>ENSE00003528791<p><p>ENSE00003641526<p><p>ENSE00003476350<p><p>ENSE00003552253<p><p>ENSE00003682846<p><p>ENSE00003533525<p><p>ENSE00003545545<p><p>ENSE00003470287<p><p>ENSE00003470520<p><p>ENSE00003459077<p><p>ENSE00003542601<p><p>ENSE00003523005<p><p>ENSE00003600441<p><p>ENSE00003683074<p><p>ENSE00003477925<p><p>ENSE00003605286<p><p>ENSE00003636267<p><p>ENSE00003672962<p><p>ENSE00003632780<p><p>ENSE00003615962<p><p>ENSE00003600212<p><p>ENSE00002094574<p><p>ENSE00002096251<p><p>ENSE00002096674<p><p>ENSE00003672962<p><p>ENSE00003632780<p><p>ENSE00002129849<p><p>ENSE00002104872<p><p>ENSE00002128315<p><p>ENSE00002120116<p><p>ENSE00002095132<p><p>ENSE00003758427<p><p>ENSE00003659527<p><p>ENSE00003573624<p><p>ENSE00002131556<p><p>ENSE00002090754<p><p>ENSE00003572539<p><p>ENSE00002100725<p><p>ENSE00003758445<p></p>
-               <a href="main_page">MAIN page</a>
+   <html lang="en">
+   <head>
+       <meta charset="UTF-8">
+       <title>Gene sequence page</title>
+   </head>
+   <body>
+       <h1>GENE SEQUENCE</h1>
+       <p> The genes (ID) in the chromosome 8 of the homo sapiens  between 140424943 and 140624564 are: <p>TRAPPC9<p><p>AC107375.1<p><p>CHRAC1<p><p>AGO2<p><p>AC067931.1<p><p>AC067931.2<p></p>
+           <a href="main_page">MAIN page</a>
 
-           </body>
-           </html>
+       </body>
+       </html>
+
 
 
 
