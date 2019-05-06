@@ -506,7 +506,20 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
             # Send the response message
             self.wfile.write(str.encode(contents))
+        except TypeError:
+            filename = open('error.html', 'r')
+            contents = filename.read()
 
+            self.send_response(200)  # -- Status line: OK!
+
+            # Define the content-type header:
+            self.send_header("Content-Type", "text/html\r\n")
+
+            # The header is finished
+            self.end_headers()
+
+            # Send the response message
+            self.wfile.write(str.encode(contents))
 # ------------------------
 # - Server MAIN program
 # ------------------------
